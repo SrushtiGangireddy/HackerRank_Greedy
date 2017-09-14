@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+   
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int[] numbers = new int[n];
+        
+        for(int i=0;i<n;i++){
+            numbers[i] = in.nextInt();
+        }
+         
+        
+        int diff = Integer.MAX_VALUE;
+        
+        Arrays.sort(numbers);
+        
+        for(int i=0;i<n-1;i++){
+            
+            int temp = numbers[i+1] - numbers[i];
+            
+            if(Math.abs(temp) < diff){
+                diff = Math.abs(temp);
+            }
+            
+        }
+        
+        System.out.println(diff);
+        
+    }
+}
