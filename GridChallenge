@@ -1,0 +1,56 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+   public static void main(String[] args) {
+       
+       Scanner sc = new Scanner(System.in);
+       
+       int t = sc.nextInt();
+       
+       for(int i=0;i<t;i++){
+           
+           int n = sc.nextInt();
+           
+           char[][] letters = new char[n][n];
+           
+           for(int j=0;j<n;j++){
+               String word = sc.next();
+               
+            for(int k=0;k<n;k++){
+                letters[j][k] = word.charAt(k);
+            }    
+               
+               Arrays.sort(letters[i]);
+               
+           }
+           
+           if(isPossible(letters))
+               System.out.println("YES");
+           else
+               System.out.println("NO");
+       }
+   }
+    
+   public static boolean isPossible(char[][] letters){
+    
+       for(int i=0;i<letters.length;i++){
+           for(int j=0;j<letters.length-1;j++){
+               
+              if(letters[j][i]>letters[j+1][i]) return false;
+               
+               
+           }
+       }
+       return true;
+       
+       
+   } 
+    
+    
+
+}
