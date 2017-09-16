@@ -1,0 +1,187 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+       
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        
+        int[] sides = new int[n];
+        
+        for(int i=0;i<n;i++){
+            sides[i] = sc.nextInt();
+        }
+        
+        Arrays.sort(sides);
+        
+        ArrayList<ArrayList<Integer>> possible = new ArrayList<ArrayList<Integer>>();
+        HashMap<Integer,ArrayList<String>> maxTriList = new HashMap<Integer,ArrayList<String>>();
+        
+        for(int i=0;i<(n-2);i++){
+            try{
+            if((sides[i]+sides[i+1]) > sides[i+2]){
+                
+                ArrayList<Integer> temp = new ArrayList<Integer>();
+                temp.add(sides[i]);
+                temp.add(sides[i+1]);
+                temp.add(sides[i+2]);
+                possible.add(temp);
+            }
+            }catch(ArrayIndexOutOfBoundsException aie){
+                
+            }
+            
+        }
+        
+        int max = -1;
+        
+        if(possible.size() == 0){
+            System.out.println("-1");
+        }else{
+            
+            Iterator it = possible.iterator();
+            while(it.hasNext()){
+                ArrayList<Integer> tri = (ArrayList<Integer>)it.next();
+                
+                String triStr = new String();
+                
+                int perim = 0;
+                for(Integer side:tri){
+                    perim += side;
+                    
+                    if(triStr.length() == 0){
+                        triStr = String.valueOf(side);
+                    }else{
+                        triStr = triStr + ","+String.valueOf(side);
+                    }
+                    
+                }
+                
+                if(maxTriList.containsKey(perim)){
+                    ArrayList<String> temp = (ArrayList<String>)maxTriList.get(perim);
+                        temp.add(triStr);
+                    maxTriList.put(perim,temp);
+                }else{
+                    ArrayList<String> temp = new ArrayList<String>();
+                    temp.add(triStr);
+                    maxTriList.put(perim,temp);
+                }
+                
+                if(perim > max){
+                    max = perim;
+                }
+                
+            }
+            
+            if(maxTriList.get(max).size() == 1){
+                
+                String temp = (String)maxTriList.get(max).get(0);
+                
+                String[] sidees = temp.split(",");
+               
+                
+                for(String side:sidees){
+                   // int sid = Integer.valueOf(side);
+                    System.out.print(side+" ");
+                }
+                System.out.println();
+                
+            }else{
+                ArrayList<String> triList = (ArrayList<String>)maxTriList.get(max);
+                
+                int max_long = 0;
+                int min_long = 0;
+                
+                for(String trie:triList){
+                    
+                    String[] tri = trie.split(",");
+                     
+                    int max_side = Integer.valueOf(tri[2]);
+                    int min_side = Integer.valueOf(tri[0]);
+                    
+                    if(max_side > max_long){
+                        max_long = max_side;
+                    }
+                    if(min_side > min_long){
+                        min_long = min_side;
+                    }
+          
+                }
+                
+                int max_length = 0;
+                int min_length = 0;
+                
+                ArrayList<String> max_len = new ArrayList<String>();
+                ArrayList<String> min_len = new ArrayList<String>();
+                
+                for(String trie:triList){
+                    String[] trisplit = trie.split(",");
+                    
+                    int last = Integer.valueOf(trisplit[2]);
+                    int first = Integer.valueOf(trisplit[0]);
+                    
+                    if(first == min_long){
+                        min_length++;
+                        min_len.add(trie);
+                    }
+                    if(last == max_long){
+                        max_length++;
+                        max_len.add(trie);
+                    }
+                    
+                }
+                
+                if(max_len.size() == 1){
+                    
+                    String[] sidese = max_len.get(0).split(",");
+                    
+                    for(String sidei:sidese){
+                        System.out.print(Integer.valueOf(sidei)+" ");
+                    }
+                    System.out.println();
+                    
+                }else if(min_len.size() == 1){
+                    
+                    String[] sidese = min_len.get(0).split(",");
+                    
+                    for(String sidei:sidese){
+                        System.out.print(Integer.valueOf(sidei)+" ");
+                    }
+                    System.out.println();
+                }else{
+                    String[] sidese = max_len.get(0).split(",");
+                    
+                    for(String sidei:sidese){
+                        System.out.print(Integer.valueOf(sidei)+" ");
+                    }
+                    System.out.println();
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+}
