@@ -1,0 +1,85 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        
+        HashMap<Integer,ArrayList<Integer>> lucks = new HashMap<Integer,ArrayList<Integer>>();
+        
+        for(int i=0;i<n;i++){
+            
+            int luck = sc.nextInt();
+            int imp = sc.nextInt();
+            
+            if(lucks.containsKey(imp)){
+                ArrayList<Integer> luck_values = (ArrayList<Integer>)lucks.get(imp);
+                luck_values.add(luck);
+                lucks.put(imp,luck_values);
+            }else{
+                ArrayList<Integer> luck_values = new ArrayList<Integer>();
+                luck_values.add(luck);
+                lucks.put(imp,luck_values);
+            }
+            
+        }
+        
+        ArrayList<Integer> umimp_luck = (ArrayList<Integer>)lucks.get(0);
+        ArrayList<Integer> imp_luck = (ArrayList<Integer>)lucks.get(1); 
+        
+        if(umimp_luck != null){
+             Collections.sort(umimp_luck);
+        }
+        if(imp_luck != null){
+            Collections.sort(imp_luck);
+        }
+        
+       
+       
+        
+        int rem = (imp_luck != null) ? (imp_luck.size() - k) : k;
+        
+        long luck_rem = 0;
+        
+        if(imp_luck != null){
+        
+        for(int i=0;i<rem;i++){
+            
+           int temp = imp_luck.get(0);
+           imp_luck.remove(0);
+           luck_rem -= temp;
+            
+        }
+        }
+        
+      //  System.out.println(lucks.get(1));
+        
+    
+        if(umimp_luck != null){
+            
+       
+        for(int i=0;i<umimp_luck.size();i++){
+            luck_rem += umimp_luck.get(i);
+        }
+        
+        }
+        
+        if(imp_luck != null){
+        
+        for(int i=0;i<imp_luck.size();i++){
+            luck_rem += imp_luck.get(i);
+        }
+        
+        }
+        System.out.println(luck_rem);
+        
+    }
+}
