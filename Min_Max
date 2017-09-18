@@ -1,0 +1,42 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution{
+    public static void main(String args[]){
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        
+        int k = sc.nextInt();
+        
+        for(int i = 0;i<n;i++){
+            
+            nums[i] = sc.nextInt();
+            
+        }
+        
+        Arrays.sort(nums);
+   
+        
+        ArrayList<Integer> unfairness = new ArrayList<Integer>();
+        
+        int len = nums.length;
+        
+        for(int i=0;(i+k-1)<len;i++){
+            
+            int min = nums[i];
+            int max = nums[i+k-1];
+            
+            unfairness.add((max-min));
+            
+        }
+        
+        Collections.sort(unfairness);
+        
+        System.out.println(unfairness.get(0));
+        
+        
+    }
+}
