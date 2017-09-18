@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution{
+    
+    public static void main(String args[]){
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int num_orders = sc.nextInt();
+        
+        TreeMap<Integer,ArrayList<Integer>> orders = new TreeMap<Integer,ArrayList<Integer>>();
+        
+        for(int i=0;i<num_orders;i++){
+            
+            int t = sc.nextInt();
+            int d = sc.nextInt();
+            
+            int pt = (t+d);
+            
+            if(orders.containsKey(pt)){
+                ArrayList<Integer> temp = (ArrayList<Integer>)orders.get(pt);
+                temp.add((i+1));
+                orders.put(pt,temp);
+            }else{
+                ArrayList<Integer> temp = new ArrayList<Integer>();
+                temp.add((i+1));
+                orders.put(pt,temp);
+            }
+            
+        }
+        
+        Iterator it = orders.entrySet().iterator();
+        while(it.hasNext()){
+            
+            Map.Entry pair = (Map.Entry)it.next();
+            
+            int key = (Integer)pair.getKey();
+            ArrayList<Integer> order_nums = (ArrayList<Integer>)pair.getValue();
+            
+            Collections.sort(order_nums);
+            
+            for(Integer on:order_nums){
+                System.out.print(on+" ");
+            }
+            
+            
+            
+        }
+        
+    }
+    
+}
