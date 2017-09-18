@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        
+        int qu = sc.nextInt();
+        
+        for(int i=0;i<qu;i++){
+            
+            int m = sc.nextInt();
+            int n = sc.nextInt();
+            
+            Integer[] yi = new Integer[m-1];
+            Integer[] xi = new Integer[n-1];
+            
+            for(int j=0;j<m-1;j++){
+                yi[j] = sc.nextInt();
+            }
+            
+            for(int j=0;j<n-1;j++){
+                xi[j] = sc.nextInt();
+            }
+            
+            Arrays.sort(yi,Collections.reverseOrder());
+            Arrays.sort(xi,Collections.reverseOrder());
+            
+            long sum = 0;
+            
+            int v=1;
+            int h=1;
+            
+            while(v<m || h<n){
+                
+                if(v<m && (h>=n || yi[v-1]>xi[h-1])){
+                    
+                    sum= (sum + ((long)h*(long)yi[v-1])%1000000007)%1000000007;
+                    v++;
+                }else if(h<n && (v>=m || xi[h-1]>=yi[v-1])) {
+                    sum= (sum + ((long)v*(long)xi[h-1])%1000000007)%1000000007;
+                    h++;
+                }
+                
+            }
+            
+            System.out.println(sum);
+            
+        }
+        
+        
+    }
+}
