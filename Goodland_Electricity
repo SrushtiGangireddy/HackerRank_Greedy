@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+       
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        
+        TreeSet<Integer> power = new TreeSet<Integer>();
+        
+        for(int i=0;i<n;i++){
+            int temp = sc.nextInt();
+            if(temp == 1){
+                power.add(i);
+            }
+        }
+        
+        if(power.lower(k) == null){
+            System.out.println("-1");
+            return;
+        }
+        
+        int c = power.lower(k);
+        
+        int counter = 1;
+        
+        while((c+k) < n){
+            
+            if(c == power.lower(c+2*k)){
+                System.out.println("-1");
+                return;
+            }
+            c = power.lower(c+2*k);
+            counter++;
+        }
+        
+        System.out.println(counter);
+        
+        
+    }
+}
